@@ -62,8 +62,9 @@ h1 {
   box-shadow: 0px 10px var(--very-dark-blue);
   border-radius: 4px;
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 600;
   font-variant: small-caps;
+  font-family: "DM Mono", monospace;
   letter-spacing: 4px;
   color: var(--soft-red);
 }
