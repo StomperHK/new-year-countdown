@@ -10,10 +10,6 @@ This site was made with the design provided by Front-End Mentor (https://www.fro
 - CSS Grid
 - JavaScript
 
-## What I Learned
-
-project not finished.
-
 ## Solution link
 
 https://new-year-countdown-stomperhk.vercel.app
