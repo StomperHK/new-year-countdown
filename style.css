@@ -19,14 +19,21 @@
   --bg-color: rgb(30, 31, 41);
 }
 
+html {
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  background: url("./images/bg-stars.svg") var(--bg-color);
-  background-size: cover;
+  background: url("./images/bg-stars.svg");
+  background-size: auto 110%;
   user-select: none;
+  animation: move-background 20s infinite ease-in-out alternate;
+  transition: 150ms linear opacity, 300ms ease-in-out transform;
 }
 
 a {
@@ -116,15 +123,22 @@ h1 {
   bottom: 0px;
   left: 50%;
   transform: translate(-50%, 40px);
+  transition: 150ms linear transform;
+}
+.timer-panels p, .timer-panels p span {
   font-variant: small-caps;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 4px;
   color: var(--grayish-blue);
 }
+.timer-panels p span {
+  transition: 150ms linear opacity;
+}
 
 .page-footer {
   position: relative;
+  overflow: hidden;
 }
 .page-footer__navigation {
   display: flex;
@@ -132,10 +146,17 @@ h1 {
   position: absolute;
   left: 50%;
   bottom: 40px;
+  z-index: 2;
   transform: translateX(-50%);
 }
 @media (hover: hover) {
   .page-footer__navigation__link:hover svg {
+    fill: var(--soft-red);
+    transform: translateY(-5px);
+  }
+}
+@media (hover: none) {
+  .page-footer__navigation__link:active svg {
     fill: var(--soft-red);
     transform: translateY(-5px);
   }
@@ -145,6 +166,25 @@ h1 {
 }
 .page-footer__mountain-image {
   width: 100%;
+  vertical-align: bottom;
+  transition: 300ms transform ease-in-out;
+}
+
+.hide-body-element {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.move-paragraph-to-right.move-paragraph-to-right {
+  transform: translate(calc(-50% + 12px), 40px);
+}
+
+.hide-element {
+  opacity: 0;
+}
+
+.hide-mountains.hide-mountains {
+  transform: scale(1.8) translateY(100%);
 }
 
 @media (max-width: 665px) {
@@ -162,6 +202,15 @@ h1 {
   }
   .timer-panels__panel--small span {
     font-size: 31px;
+  }
+  .page-footer {
+    padding-top: 12vh;
+  }
+  .page-footer__mountain-image {
+    transform: scale(2.8);
+  }
+  .hide-mountains.hide-mountains {
+    transform: scale(4.8) translateY(100%);
   }
 }
 @media (max-width: 560px) {
@@ -184,6 +233,20 @@ h1 {
   }
   .timer-panels__panel--small span {
     font-size: 21px;
+  }
+  .move-paragraph-to-right.move-paragraph-to-right {
+    transform: translate(calc(-50% + 10px), 40px);
+  }
+}
+@keyframes move-background {
+  from {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 30% 60%;
+  }
+  to {
+    background-position: 70% 20%;
   }
 }
 

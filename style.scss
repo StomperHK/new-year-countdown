@@ -23,6 +23,11 @@
   --bg-color: rgb(30, 31, 41);
 }
 
+html {
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -30,10 +35,14 @@ body {
 
   min-height: 100vh;
 
-  background: url('./images/bg-stars.svg') var(--bg-color);
-  background-size: cover;
+  background: url('./images/bg-stars.svg');
+  background-size: auto 110%;
 
   user-select: none;
+
+  animation: move-background 20s infinite ease-in-out alternate;
+
+  transition: 150ms linear opacity, 300ms ease-in-out transform;
 }
 
 a {
@@ -152,16 +161,26 @@ h1 {
     left: 50%;
     transform: translate(-50%, 40px);
 
-    font-variant: small-caps;
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 4px;
-    color: var(--grayish-blue);
+    transition: 150ms linear transform;
+
+    &, span {
+      font-variant: small-caps;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 4px;
+      color: var(--grayish-blue);
+    }
+
+    span {
+      transition: 150ms linear opacity;
+    }
   }
 }
 
 .page-footer {
   position: relative;
+
+  overflow: hidden;
 
   &__navigation {
     display: flex;
@@ -170,11 +189,19 @@ h1 {
     position: absolute;
     left: 50%;
     bottom: 40px;
+    z-index: 2  ;
     transform: translateX(-50%);
 
     &__link {
       @media (hover: hover) {
         &:hover svg {
+          fill: var(--soft-red);
+          transform: translateY(-5px);
+        }
+      }
+
+      @media (hover: none) {
+        &:active svg {
           fill: var(--soft-red);
           transform: translateY(-5px);
         }
@@ -188,7 +215,30 @@ h1 {
 
   &__mountain-image {
     width: 100%;
+    vertical-align: bottom;
+
+    transition: 300ms transform ease-in-out ;
   }
+}
+
+
+// JavaScript classes
+
+.hide-body-element {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.move-paragraph-to-right.move-paragraph-to-right {
+  transform: translate(calc(-50% + 12px), 40px);
+}
+
+.hide-element {
+  opacity: 0;
+}
+
+.hide-mountains.hide-mountains {
+  transform: scale(1.8) translateY(100%);
 }
 
 
@@ -213,6 +263,20 @@ h1 {
         }
       }
     }
+  }
+
+  .page-footer {
+    padding-top: 12vh;
+
+    &__mountain-image {
+      transform: scale(2.8);
+    }
+  }
+
+  // Update JavaScript classes
+
+  .hide-mountains.hide-mountains {
+    transform: scale(4.8) translateY(100%);
   }
 }
 
@@ -241,5 +305,26 @@ h1 {
         }
       }
     }
+  }
+
+  // Updating JavaScript class
+
+  .move-paragraph-to-right.move-paragraph-to-right {
+    transform: translate(calc(-50% + 10px), 40px);
+  }
+}
+
+
+@keyframes move-background {
+  from {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 30% 60%;
+  }
+
+  to {
+    background-position: 70% 20%;
   }
 }
