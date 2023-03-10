@@ -16,7 +16,7 @@ project not finished.
 
 ## Solution link
 
-project not finished.
+https://new-year-countdown-stomperhk.vercel.app
 
 ## Author
 
