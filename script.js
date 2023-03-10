@@ -1,3 +1,8 @@
+const bodyEL = document.querySelector('[data-js="body-element"]')
+const mainEL = document.querySelector('[data-js="main-element"]')
+const footerNavigationEL = document.querySelector('[data-js="page-footer__navigation"]')
+const footerMountainImageEL = document.querySelector('[data-js="page-footer__mountain-image"]')
+
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
 const daysLeftPanelSpanEL = document.querySelector('[data-js="timer-panels__days-panel-span"]')
 const hoursLeftPanelEL = document.querySelector('[data-js="timer-panels__hours-panel"]')
@@ -25,6 +30,20 @@ function getDifferenceBetweenDates(initialDate, finalDate) {
 
 function padValue(value) {
   return String(value).padStart(2, '0')
+}
+
+function removeUnitPlural(panel, panelText, index) {
+  const panelParagraphEL = index !== 3 ? panel.parentElement.querySelector('p') : panel.parentElement.parentElement.querySelector('p')    // I had to do this because, on panel of hours, using parentElement wasn't return the <p>
+  const paragraphPluralSpanEL = panelParagraphEL.children[0]
+
+  if (panelText === "01") {
+    panelParagraphEL.classList.add('move-paragraph-to-right')
+    paragraphPluralSpanEL.classList.add('hide-element')
+  }
+  else {
+    panelParagraphEL.classList.remove('move-paragraph-to-right')
+    paragraphPluralSpanEL.classList.remove('hide-element')
+  }
 }
 
 function getAmountOfDaysBasedOnLeapYear() {
@@ -75,8 +94,6 @@ function updateTimer() {
       else {
         panel.textContent = '59'
       }
-
-      return
     }
 
     else if (theCurrentElementAreTheMinutes) {
@@ -88,8 +105,6 @@ function updateTimer() {
       else if (theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
         panel.textContent = '59'
       }
-
-      return
     }
 
     else if (theCurrentElementAreTheHours) {
@@ -102,8 +117,6 @@ function updateTimer() {
       else if (theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
         panel.textContent = '23'
       }
-
-      return
     }
 
     else {
@@ -120,6 +133,8 @@ function updateTimer() {
 
       reducePanelSize(daysLeftPanelSpanEL)
     }
+
+    removeUnitPlural(panel, panel.textContent, index)
   })
 }
 
@@ -144,9 +159,18 @@ function reducePanelSize(panel) {
     daysLeftPanelEL.classList.add('timer-panels__panel--small')
   }
   else {
-    console.log('d')
     daysLeftPanelEL.classList.remove('timer-panels__panel--small')  
   }
 }
 
 reducePanelSize(daysLeftPanelSpanEL)
+
+function startPageAnimation() {
+  bodyEL.classList.remove('hide-body-element')
+  // mainEL.classList.remove('')
+  // footerNavigationEL.classList.remove('')
+  footerMountainImageEL.classList.remove('')
+}
+
+
+document.addEventListener('load', startPageAnimation)
