@@ -27,8 +27,6 @@ function padValue(value) {
   return String(value).padStart(2, '0')
 }
 
-// function 
-
 function getAmountOfDaysBasedOnLeapYear() {
   const year = new Date().getFullYear()
 
