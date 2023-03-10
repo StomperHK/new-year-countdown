@@ -55,7 +55,7 @@ h1 {
 }
 
 main {
-  transition: opacity 300ms 1500ms ease-in-out;
+  transition: opacity 200ms 1800ms ease-in-out;
 }
 
 .timer-panels {
@@ -149,10 +149,10 @@ main {
   gap: 20px;
   position: absolute;
   left: 50%;
-  bottom: 40px;
+  bottom: 80px;
   z-index: 2;
   transform: translateX(-50%);
-  transition: 300ms 1600ms opacity ease-in-out;
+  transition: 200ms 1800ms opacity ease-in-out;
 }
 @media (hover: hover) {
   .page-footer__navigation__link:hover svg {
@@ -172,7 +172,7 @@ main {
 .page-footer__mountain-image {
   width: 100%;
   vertical-align: bottom;
-  transition: 300ms 1000ms transform ease-in-out;
+  transition: 300ms 1400ms transform ease-in-out;
 }
 
 .hide-body-element {
@@ -192,6 +192,17 @@ main {
   transform: scale(1.8) translateY(100%);
 }
 
+@media (max-width: 840px) {
+  .page-footer {
+    padding-top: 12vh;
+  }
+  .page-footer__mountain-image {
+    transform: scale(2.8);
+  }
+  .hide-mountains.hide-mountains {
+    transform: scale(4.8) translateY(100%);
+  }
+}
 @media (max-width: 665px) {
   .timer-panels {
     gap: 25px;
@@ -209,19 +220,19 @@ main {
     font-size: 31px;
   }
   .page-footer {
-    padding-top: 12vh;
+    padding-top: 20vh;
   }
   .page-footer__mountain-image {
-    transform: scale(2.8);
+    transform: scale(4.4);
   }
   .hide-mountains.hide-mountains {
-    transform: scale(4.8) translateY(100%);
+    transform: scale(5.8) translateY(100%);
   }
 }
 @media (max-width: 560px) {
   h1 {
-    margin-top: 7vh;
-    margin-bottom: 7vh;
+    margin-top: 4vh;
+    margin-bottom: 5vh;
   }
   .timer-panels {
     grid-template-columns: auto auto;
