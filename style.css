@@ -51,11 +51,14 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, auto);
   justify-content: center;
-  justify-items: center;
-  gap: 20px;
+  gap: 40px;
+}
+.timer-panels > div {
+  margin-bottom: 30px;
+  position: relative;
 }
 .timer-panels__panel {
-  padding: 1.5vw 1vw;
+  padding: 20px;
   position: relative;
   overflow: hidden;
   background-image: linear-gradient(to bottom, var(--dark-desaturated-blue) 50%, var(--dark-desaturated-blue-lighter) 50%);
@@ -66,6 +69,10 @@ h1 {
   font-variant: small-caps;
   font-family: "DM Mono", monospace;
   letter-spacing: 4px;
+  color: var(--soft-red);
+}
+.timer-panels__panel span {
+  font-size: 57px;
   color: var(--soft-red);
 }
 .timer-panels__panel__line-through {
@@ -96,12 +103,24 @@ h1 {
   right: 0px;
   transform: translate(50%, -50%);
 }
+.timer-panels__panel--small {
+  display: flex;
+  align-items: center;
+  height: 119px;
+}
+.timer-panels__panel--small span {
+  font-size: 38px;
+}
 .timer-panels p {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 40px);
   font-variant: small-caps;
   font-weight: 700;
+  font-size: 18px;
   letter-spacing: 4px;
   color: var(--grayish-blue);
-  font-size: 18px;
 }
 
 .page-footer {
@@ -112,7 +131,7 @@ h1 {
   gap: 20px;
   position: absolute;
   left: 50%;
-  bottom: 20%;
+  bottom: 40px;
   transform: translateX(-50%);
 }
 @media (hover: hover) {
@@ -126,6 +145,46 @@ h1 {
 }
 .page-footer__mountain-image {
   width: 100%;
+}
+
+@media (max-width: 665px) {
+  .timer-panels {
+    gap: 25px;
+  }
+  .timer-panels__panel {
+    font-size: 49px;
+  }
+  .timer-panels__panel span {
+    font-size: 47px;
+  }
+  .timer-panels__panel--small {
+    height: 104px;
+  }
+  .timer-panels__panel--small span {
+    font-size: 31px;
+  }
+}
+@media (max-width: 560px) {
+  h1 {
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+  }
+  .timer-panels {
+    grid-template-columns: auto auto;
+    column-gap: 40px;
+  }
+  .timer-panels__panel {
+    font-size: 35px;
+  }
+  .timer-panels__panel span {
+    font-size: 35px;
+  }
+  .timer-panels__panel--small {
+    height: 86px;
+  }
+  .timer-panels__panel--small span {
+    font-size: 21px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
