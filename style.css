@@ -33,7 +33,7 @@ body {
   background-size: auto 110%;
   user-select: none;
   animation: move-background 20s infinite ease-in-out alternate;
-  transition: 150ms linear opacity, 300ms ease-in-out transform;
+  transition: 150ms 1000ms linear opacity, 300ms 1000ms ease-in-out transform;
 }
 
 a {
@@ -52,6 +52,10 @@ h1 {
   text-transform: lowercase;
   text-align: center;
   letter-spacing: 4px;
+}
+
+main {
+  transition: opacity 300ms 1500ms ease-in-out;
 }
 
 .timer-panels {
@@ -148,6 +152,7 @@ h1 {
   bottom: 40px;
   z-index: 2;
   transform: translateX(-50%);
+  transition: 300ms 1600ms opacity ease-in-out;
 }
 @media (hover: hover) {
   .page-footer__navigation__link:hover svg {
@@ -167,12 +172,12 @@ h1 {
 .page-footer__mountain-image {
   width: 100%;
   vertical-align: bottom;
-  transition: 300ms transform ease-in-out;
+  transition: 300ms 1000ms transform ease-in-out;
 }
 
 .hide-body-element {
   opacity: 0;
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .move-paragraph-to-right.move-paragraph-to-right {

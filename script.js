@@ -167,10 +167,10 @@ reducePanelSize(daysLeftPanelSpanEL)
 
 function startPageAnimation() {
   bodyEL.classList.remove('hide-body-element')
-  // mainEL.classList.remove('')
-  // footerNavigationEL.classList.remove('')
-  footerMountainImageEL.classList.remove('')
+  mainEL.classList.remove('hide-element')
+  footerNavigationEL.classList.remove('hide-element')
+  footerMountainImageEL.classList.remove('hide-mountains')
 }
 
 
-document.addEventListener('load', startPageAnimation)
+window.addEventListener('load', startPageAnimation)
