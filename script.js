@@ -1,4 +1,5 @@
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
+const daysLeftPanelSpanEL = document.querySelector('[data-js="timer-panels__days-panel-span"]')
 const hoursLeftPanelEL = document.querySelector('[data-js="timer-panels__hours-panel"]')
 const minutesLeftPanelEL = document.querySelector('[data-js="timer-panels__minutes-panel"]')
 const secondsLeftPanelEL = document.querySelector('[data-js="timer-panels__seconds-panel"]')
@@ -25,6 +26,8 @@ function getDifferenceBetweenDates(initialDate, finalDate) {
 function padValue(value) {
   return String(value).padStart(2, '0')
 }
+
+// function 
 
 function getAmountOfDaysBasedOnLeapYear() {
   const year = new Date().getFullYear()
@@ -55,8 +58,8 @@ function updateTimer() {
       panelValue: hoursLeftPanelEL.textContent
     },
     {
-      panel: daysLeftPanelEL,
-      panelValue: daysLeftPanelEL.textContent
+      panel: daysLeftPanelSpanEL,
+      panelValue: daysLeftPanelSpanEL.textContent
     }
   ]
 
@@ -116,6 +119,8 @@ function updateTimer() {
       else if (theHoursPanelValueIsZero && theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
         panel.textContent = getAmountOfDaysBasedOnLeapYear()
       }
+
+      reducePanelSize(daysLeftPanelSpanEL)
     }
   })
 }
@@ -126,7 +131,7 @@ function startTimer() {
   const newYearDate = new Date(`${newYearDateString}`)
   const {daysLeft, hoursLeft, minutesLeft, secondsLeft} = getDifferenceBetweenDates(currentDate, newYearDate)
   
-  daysLeftPanelEL.textContent = padValue(daysLeft)
+  daysLeftPanelSpanEL.textContent = padValue(daysLeft)
   hoursLeftPanelEL.textContent = padValue(hoursLeft)
   minutesLeftPanelEL.textContent = padValue(minutesLeft)
   secondsLeftPanelEL.textContent = padValue(secondsLeft)
@@ -135,3 +140,15 @@ function startTimer() {
 }
 
 startTimer()
+
+function reducePanelSize(panel) {
+  if (panel.textContent.length === 3) {
+    daysLeftPanelEL.classList.add('timer-panels__panel--small')
+  }
+  else {
+    console.log('d')
+    daysLeftPanelEL.classList.remove('timer-panels__panel--small')  
+  }
+}
+
+reducePanelSize(daysLeftPanelSpanEL)
