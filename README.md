@@ -1,4 +1,4 @@
-# Frontend Mentor - Countdown timer
+# Frontend Mentor - New year countdown
 
 This site was made with the design provided by Front-End Mentor (https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-).
 
