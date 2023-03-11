@@ -54,10 +54,6 @@ h1 {
   letter-spacing: 4px;
 }
 
-main {
-  transition: opacity 200ms 1800ms ease-in-out;
-}
-
 .timer-panels {
   display: grid;
   grid-template-columns: repeat(4, auto);
@@ -152,7 +148,6 @@ main {
   bottom: 80px;
   z-index: 2;
   transform: translateX(-50%);
-  transition: 200ms 1800ms opacity ease-in-out;
 }
 @media (hover: hover) {
   .page-footer__navigation__link:hover svg {
@@ -172,7 +167,7 @@ main {
 .page-footer__mountain-image {
   width: 100%;
   vertical-align: bottom;
-  transition: 300ms 1400ms transform ease-in-out;
+  transition: 300ms 1700ms transform ease-in-out;
 }
 
 .hide-body-element {

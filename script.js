@@ -1,6 +1,4 @@
 const bodyEL = document.querySelector('[data-js="body-element"]')
-const mainEL = document.querySelector('[data-js="main-element"]')
-const footerNavigationEL = document.querySelector('[data-js="page-footer__navigation"]')
 const footerMountainImageEL = document.querySelector('[data-js="page-footer__mountain-image"]')
 
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
