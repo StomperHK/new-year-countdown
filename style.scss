@@ -216,8 +216,6 @@ h1 {
   &__mountain-image {
     width: 100%;
     vertical-align: bottom;
-
-    transition: 300ms 1700ms transform ease-in-out;
   }
 }
 
@@ -237,10 +235,6 @@ h1 {
   opacity: 0;
 }
 
-.hide-mountains.hide-mountains {
-  transform: scale(1.8) translateY(100%);
-}
-
 
 // At-rules
 
@@ -251,12 +245,6 @@ h1 {
     &__mountain-image {
       transform: scale(2.8);
     }
-  }
-
-  // Update JavaScript classes
-
-  .hide-mountains.hide-mountains {
-    transform: scale(4.8) translateY(100%);
   }
 }
 
@@ -287,12 +275,6 @@ h1 {
     &__mountain-image {
       transform: scale(4.4);
     }
-  }
-
-  // Update JavaScript classes
-
-  .hide-mountains.hide-mountains {
-    transform: scale(5.8) translateY(100%);
   }
 }
 

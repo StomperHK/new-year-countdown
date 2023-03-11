@@ -1,5 +1,4 @@
 const bodyEL = document.querySelector('[data-js="body-element"]')
-const footerMountainImageEL = document.querySelector('[data-js="page-footer__mountain-image"]')
 
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
 const daysLeftPanelSpanEL = document.querySelector('[data-js="timer-panels__days-panel-span"]')
@@ -165,9 +164,6 @@ reducePanelSize(daysLeftPanelSpanEL)
 
 function startPageAnimation() {
   bodyEL.classList.remove('hide-body-element')
-  footerMountainImageEL.classList.remove('hide-mountains')
-  mainEL.classList.remove('hide-element')
-  footerNavigationEL.classList.remove('hide-element')
 }
 
 
