@@ -116,7 +116,7 @@ h1 {
   height: 119px;
 }
 .timer-panels__panel--small span {
-  font-size: 38px;
+  font-size: 45px;
 }
 .timer-panels p {
   position: absolute;
@@ -204,7 +204,7 @@ h1 {
     height: 104px;
   }
   .timer-panels__panel--small span {
-    font-size: 31px;
+    font-size: 36px;
   }
   .page-footer {
     padding-top: 20vh;
@@ -232,7 +232,7 @@ h1 {
     height: 86px;
   }
   .timer-panels__panel--small span {
-    font-size: 21px;
+    font-size: 24px;
   }
   .move-paragraph-to-right.move-paragraph-to-right {
     transform: translate(calc(-50% + 10px), 40px);
