@@ -32,6 +32,7 @@ body {
   min-height: 100svh;
   background: url("./images/bg-stars.svg");
   background-size: auto 110%;
+  -webkit-user-select: none;
   user-select: none;
   animation: move-background 20s infinite ease-in-out alternate;
   transition: 150ms 1000ms linear opacity, 300ms 1000ms ease-in-out transform;

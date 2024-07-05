@@ -39,6 +39,7 @@ body {
   background: url('./images/bg-stars.svg');
   background-size: auto 110%;
 
+  -webkit-user-select: none;
   user-select: none;
 
   animation: move-background 20s infinite ease-in-out alternate;
