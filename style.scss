@@ -34,6 +34,7 @@ body {
   justify-content: space-between;
 
   min-height: 100vh;
+  min-height: 100svh;
 
   background: url('./images/bg-stars.svg');
   background-size: auto 110%;
@@ -219,6 +220,7 @@ h1 {
   }
 
   &__mountain-image {
+    min-width: 900px;
     width: 100%;
     vertical-align: bottom;
   }
@@ -243,16 +245,6 @@ h1 {
 
 // At-rules
 
-@media (max-width: 840px) {
-  .page-footer {
-    padding-top: 12vh;
-
-    &__mountain-image {
-      transform: scale(2.8);
-    }
-  }
-}
-
 @media (max-width: 665px) {
   .timer-panels {
     gap: 25px;
@@ -274,13 +266,7 @@ h1 {
     }
   }
 
-  .page-footer {
-    padding-top: 20vh;
-
-    &__mountain-image {
-      transform: scale(4.4);
-    }
-  }
+  
 }
 
 @media (max-width: 560px) {
