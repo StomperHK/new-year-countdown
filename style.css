@@ -47,12 +47,26 @@ a {
 }
 
 h1 {
-  margin: 10vh 10vw;
+  margin: 10vh 10vw 30px;
   font-variant: small-caps;
   font-size: 26px;
   text-transform: lowercase;
   text-align: center;
   letter-spacing: 4px;
+}
+
+.progress-bar {
+  margin: 0px auto 50px;
+  width: 80%;
+  height: 10px;
+  max-width: 500px;
+  overflow: hidden;
+  background-color: var(--dark-desaturated-blue);
+  border-radius: 4 px;
+}
+.progress-bar__progress {
+  height: 100%;
+  background-color: var(--grayish-blue);
 }
 
 .timer-panels {
@@ -206,8 +220,7 @@ h1 {
 }
 @media (max-width: 560px) {
   h1 {
-    margin-top: 4vh;
-    margin-bottom: 5vh;
+    margin: 4vh 5vh 30px;
   }
   .timer-panels {
     grid-template-columns: auto auto;

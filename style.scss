@@ -55,7 +55,7 @@ a {
 }
 
 h1 {
-  margin: 10vh 10vw;
+  margin: 10vh 10vw 30px;
 
   font-variant: small-caps;
   font-size: 26px;
@@ -66,6 +66,24 @@ h1 {
 
 
 // Specific styles
+
+.progress-bar {
+  margin: 0px auto 50px;
+  width: 80%;
+  height: 10px;
+  max-width: 500px;
+
+  overflow: hidden;
+
+  background-color: var(--dark-desaturated-blue);
+  border-radius: 4  px;
+
+  &__progress {
+    height: 100%;
+    
+    background-color: var(--grayish-blue);
+  } 
+}
 
 .timer-panels {
   display: grid;
@@ -271,8 +289,7 @@ h1 {
 
 @media (max-width: 560px) {
   h1 {
-    margin-top: 4vh;
-    margin-bottom: 5vh;
+    margin: 4vh 5vh 30px;
   }
 
   .timer-panels {

@@ -1,5 +1,7 @@
 const bodyEL = document.querySelector('[data-js="body-element"]')
 
+const progressBarEL = document.querySelector('[data-js="progress-bar__progress"]')
+
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
 const daysLeftPanelSpanEL = document.querySelector('[data-js="timer-panels__days-panel-span"]')
 const hoursLeftPanelEL = document.querySelector('[data-js="timer-panels__hours-panel"]')
@@ -7,14 +9,21 @@ const minutesLeftPanelEL = document.querySelector('[data-js="timer-panels__minut
 const secondsLeftPanelEL = document.querySelector('[data-js="timer-panels__seconds-panel"]')
 
 
+function setProgressBarProgress(daysLeft) {
+  const daysOfTheYear = getAmountOfDaysBasedOnLeapYear()
+  const passedDays = daysOfTheYear - (daysLeft !== undefined ? daysLeft : daysOfTheYear)
+  
+  progressBarEL.style.width = passedDays / daysOfTheYear * 100 + '%'
+}
+
 function getDifferenceBetweenDates(initialDate, finalDate) {
   let differenceInMiliseconds = Date.parse(finalDate) - Date.parse(initialDate)
   const daysLeft = Math.floor(differenceInMiliseconds / 86400000)
-  differenceInMiliseconds -= daysLeft * 86400000
+  differenceInMiliseconds %= 86400000
   const hoursLeft = Math.floor(differenceInMiliseconds / 3600000)
-  differenceInMiliseconds -= hoursLeft * 3600000
+  differenceInMiliseconds %= 3600000
   const minutesLeft = Math.floor(differenceInMiliseconds / 60000)
-  differenceInMiliseconds -= minutesLeft * 60000
+  differenceInMiliseconds %= 60000
   const secondsLeft = Math.floor(differenceInMiliseconds / 1000)
 
   return {
@@ -78,7 +87,7 @@ function updateTimer() {
   ]
 
   arrayOfPanelsAndAssociatedValues.forEach((element, index) => {   // Basicly this function is updating the timer, checking if any panel is currently with the value "00", if so the value of the current panel is restarted to 59
-    const {panel, panelValue} = element
+    let {panel, panelValue} = element
     const theCurrentElementAreTheSeconds = index === 0
     const theCurrentElementAreTheMinutes = index === 1
     const theCurrentElementAreTheHours = index === 2
@@ -122,10 +131,12 @@ function updateTimer() {
       const theSecondsPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-3].panelValue === '00'
 
       if (theHoursPanelValueIsZero && theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && theCurrentPanelValueIsNotZero) {
-        panel.textContent = String(panelValue - 1).padStart(2, '0')
+        panel.textContent = String(--panelValue).padStart(2, '0')
+        setProgressBarProgress(panelValue)
       }
       else if (theHoursPanelValueIsZero && theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
         panel.textContent = getAmountOfDaysBasedOnLeapYear()
+        setProgressBarProgress()
       }
 
       reducePanelSize(daysLeftPanelSpanEL)
@@ -138,13 +149,15 @@ function updateTimer() {
 function startTimer() {
   const currentDate = new Date()
   const newYearDateString = `${currentDate.getFullYear() + 1}-01-01T00:00:00`
-  const newYearDate = new Date(`${newYearDateString}`)
+  const newYearDate = new Date(newYearDateString)
   const {daysLeft, hoursLeft, minutesLeft, secondsLeft} = getDifferenceBetweenDates(currentDate, newYearDate)
   
   daysLeftPanelSpanEL.textContent = padValue(daysLeft)
   hoursLeftPanelEL.textContent = padValue(hoursLeft)
   minutesLeftPanelEL.textContent = padValue(minutesLeft)
   secondsLeftPanelEL.textContent = padValue(secondsLeft)
+
+  setProgressBarProgress(daysLeft)
 
   setInterval(updateTimer, 1000)
 }
