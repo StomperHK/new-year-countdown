@@ -141,7 +141,6 @@ h1 {
   overflow: hidden;
 }
 .page-footer__navigation {
-  display: flex;
   gap: 20px;
   position: absolute;
   left: 50%;
@@ -151,18 +150,22 @@ h1 {
 }
 @media (hover: hover) {
   .page-footer__navigation__link:hover svg {
-    fill: var(--soft-red);
+    color: var(--soft-red);
     transform: translateY(-5px);
   }
 }
 @media (hover: none) {
   .page-footer__navigation__link:active svg {
-    fill: var(--soft-red);
+    color: var(--soft-red);
     transform: translateY(-5px);
   }
 }
 .page-footer__navigation__link svg {
-  transition: fill 150ms linear, transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+}
+.page-footer__navigation__link path {
+  color: currentColor;
+  transition: color 150ms linear;
 }
 .page-footer__mountain-image {
   width: 100%;
@@ -249,5 +252,3 @@ h1 {
     background-position: 70% 20%;
   }
 }
-
-/*# sourceMappingURL=style.css.map */

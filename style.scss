@@ -183,7 +183,6 @@ h1 {
   overflow: hidden;
 
   &__navigation {
-    display: flex;
     gap: 20px;
 
     position: absolute;
@@ -195,21 +194,27 @@ h1 {
     &__link {
       @media (hover: hover) {
         &:hover svg {
-          fill: var(--soft-red);
+          color: var(--soft-red);
           transform: translateY(-5px);
         }
       }
 
       @media (hover: none) {
         &:active svg {
-          fill: var(--soft-red);
+          color: var(--soft-red);
           transform: translateY(-5px);
         }
       }
     }
 
     &__link svg {
-      transition: fill 150ms linear, transform 150ms ease-in-out;
+      transition: transform 150ms ease-in-out;
+    }
+
+    &__link path {
+      color: currentColor;
+
+      transition: color 150ms linear;
     }
   }
 
