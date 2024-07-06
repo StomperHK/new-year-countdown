@@ -1,5 +1,6 @@
 const bodyEL = document.querySelector('[data-js="body-element"]')
 
+const progressBarPercentageEL = document.querySelector('[data-js="progress-bar__percentage"]')
 const progressBarEL = document.querySelector('[data-js="progress-bar__progress"]')
 
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
@@ -8,12 +9,16 @@ const hoursLeftPanelEL = document.querySelector('[data-js="timer-panels__hours-p
 const minutesLeftPanelEL = document.querySelector('[data-js="timer-panels__minutes-panel"]')
 const secondsLeftPanelEL = document.querySelector('[data-js="timer-panels__seconds-panel"]')
 
+let arrayOfPanelsAndAssociatedValues = null   // will get updated after calling startTimer() function
+
 
 function setProgressBarProgress(daysLeft) {
   const daysOfTheYear = getAmountOfDaysBasedOnLeapYear()
   const passedDays = daysOfTheYear - (daysLeft !== undefined ? daysLeft : daysOfTheYear)
+  const progressAsPercentage = passedDays / daysOfTheYear * 100
   
-  progressBarEL.style.width = passedDays / daysOfTheYear * 100 + '%'
+  progressBarEL.style.width = progressAsPercentage + '%'
+  progressBarPercentageEL.textContent = (progressAsPercentage === 100 ? 99 : Math.floor(progressAsPercentage)) + '%'
 }
 
 function getDifferenceBetweenDates(initialDate, finalDate) {
@@ -27,10 +32,10 @@ function getDifferenceBetweenDates(initialDate, finalDate) {
   const secondsLeft = Math.floor(differenceInMiliseconds / 1000)
 
   return {
-    daysLeft: daysLeft,
-    hoursLeft: hoursLeft,
-    minutesLeft: minutesLeft,
-    secondsLeft: secondsLeft
+    daysLeft,
+    hoursLeft,
+    minutesLeft,
+    secondsLeft
   }
 }
 
@@ -38,11 +43,11 @@ function padValue(value) {
   return String(value).padStart(2, '0')
 }
 
-function removeUnitPlural(panel, panelText, index) {
-  const panelParagraphEL = index !== 3 ? panel.parentElement.querySelector('p') : panel.parentElement.parentElement.querySelector('p')    // I had to do this because, on panel of hours, using parentElement wasn't return the <p>
+function removeUnitPlural(panel, updatedPanelValue, panelType) {
+  const panelParagraphEL = panelType !== 'days' ? panel.parentElement.querySelector('p') : panel.parentElement.parentElement.querySelector('p')    // I had to do this because, on panel of hours, using parentElement wasn't return the <p>
   const paragraphPluralSpanEL = panelParagraphEL.children[0]
 
-  if (panelText === "01") {
+  if (updatedPanelValue === "01") {
     panelParagraphEL.classList.add('move-paragraph-to-right')
     paragraphPluralSpanEL.classList.add('hide-element')
   }
@@ -67,83 +72,63 @@ function getAmountOfDaysBasedOnLeapYear() {
 }
 
 function updateTimer() {
-  const arrayOfPanelsAndAssociatedValues = [
-    {
-      panel: secondsLeftPanelEL,
-      panelValue: secondsLeftPanelEL.textContent
-    },
-    {
-      panel: minutesLeftPanelEL,
-      panelValue: minutesLeftPanelEL.textContent
-    },
-    {
-      panel: hoursLeftPanelEL,
-      panelValue: hoursLeftPanelEL.textContent
-    },
-    {
-      panel: daysLeftPanelSpanEL,
-      panelValue: daysLeftPanelSpanEL.textContent
-    }
-  ]
+  let allPreviousValuesReseted = true
 
-  arrayOfPanelsAndAssociatedValues.forEach((element, index) => {   // Basicly this function is updating the timer, checking if any panel is currently with the value "00", if so the value of the current panel is restarted to 59
-    let {panel, panelValue} = element
-    const theCurrentElementAreTheSeconds = index === 0
-    const theCurrentElementAreTheMinutes = index === 1
-    const theCurrentElementAreTheHours = index === 2
+  for (element of arrayOfPanelsAndAssociatedValues) {   // Basicly, this function is updating the timer, checking if any panel is currently with the value "00", if so the value of the current panel is restarted to 59
+    let {panel, panelValue, panelType} = element
     const theCurrentPanelValueIsNotZero = panelValue !== '00'
 
-    if (theCurrentElementAreTheSeconds) {
+    if (panelType === 'seconds') {
       if (theCurrentPanelValueIsNotZero) {
-        panel.textContent = String(panelValue - 1).padStart(2, '0')
+        element.newValue = padValue(panelValue - 1)
+        allPreviousValuesReseted = false
       }
+      
       else {
-        panel.textContent = '59'
+        element.newValue = '59'
       }
     }
 
-    else if (theCurrentElementAreTheMinutes) {
-      const theSecondsPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-1].panelValue === '00'
-
-      if (theSecondsPanelValueIsZero && theCurrentPanelValueIsNotZero) {
-        panel.textContent = String(panelValue - 1).padStart(2, '0')
+    else if (panelType === 'minutes') {
+      if (allPreviousValuesReseted && theCurrentPanelValueIsNotZero) {
+        element.newValue = padValue(panelValue - 1)
+        allPreviousValuesReseted = false
       }
-      else if (theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
-        panel.textContent = '59'
+
+      else if (allPreviousValuesReseted && !theCurrentPanelValueIsNotZero) {
+        element.newValue = '59'
       }
     }
 
-    else if (theCurrentElementAreTheHours) {
-      const theMinutesPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-1].panelValue === '00'
-      const theSecondsPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-2].panelValue === '00'
-
-      if (theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && theCurrentPanelValueIsNotZero) {
-        panel.textContent = String(panelValue - 1).padStart(2, '0')
+    else if (panelType === 'hours') {
+      if (allPreviousValuesReseted && theCurrentPanelValueIsNotZero) {
+        element.newValue = padValue(panelValue - 1)
+        allPreviousValuesReseted = false
       }
-      else if (theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
-        panel.textContent = '23'
+
+      else if (allPreviousValuesReseted && !theCurrentPanelValueIsNotZero) {
+        element.newValue = '23'
       }
     }
 
     else {
-      const theHoursPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-1].panelValue === '00'
-      const theMinutesPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-2].panelValue === '00'
-      const theSecondsPanelValueIsZero = arrayOfPanelsAndAssociatedValues[index-3].panelValue === '00'
-
-      if (theHoursPanelValueIsZero && theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && theCurrentPanelValueIsNotZero) {
-        panel.textContent = String(--panelValue).padStart(2, '0')
+      if (allPreviousValuesReseted && theCurrentPanelValueIsNotZero) {
+        element.newValue = String(--panelValue).padStart(2, '0')
         setProgressBarProgress(panelValue)
       }
-      else if (theHoursPanelValueIsZero && theMinutesPanelValueIsZero && theSecondsPanelValueIsZero && !theCurrentPanelValueIsNotZero) {
-        panel.textContent = getAmountOfDaysBasedOnLeapYear()
+
+      else if (allPreviousValuesReseted && !theCurrentPanelValueIsNotZero) {
+        element.newValue = getAmountOfDaysBasedOnLeapYear()
         setProgressBarProgress()
       }
 
       reducePanelSize(daysLeftPanelSpanEL)
     }
 
-    removeUnitPlural(panel, panel.textContent, index)
-  })
+    removeUnitPlural(panel, element.panelValue, panelType)
+
+    if (!allPreviousValuesReseted) return
+  }
 }
 
 function startTimer() {
@@ -160,6 +145,8 @@ function startTimer() {
   setProgressBarProgress(daysLeft)
 
   setInterval(updateTimer, 1000)
+
+  arrayOfPanelsAndAssociatedValues = returnArrayOfPanelValues()
 }
 
 startTimer()
@@ -169,7 +156,7 @@ function reducePanelSize(panel) {
     daysLeftPanelEL.classList.add('timer-panels__panel--small')
   }
   else {
-    daysLeftPanelEL.classList.remove('timer-panels__panel--small')  
+    daysLeftPanelEL.classList.remove('timer-panels__panel--small')
   }
 }
 

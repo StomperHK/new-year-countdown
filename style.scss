@@ -35,6 +35,7 @@ body {
 
   min-height: 100vh;
   min-height: 100svh;
+  margin-bottom: 50px;
 
   background: url('./images/bg-stars.svg');
   background-size: auto 110%;
@@ -69,21 +70,44 @@ h1 {
 // Specific styles
 
 .progress-bar {
-  margin: 0px auto 50px;
-  width: 80%;
-  height: 10px;
-  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  overflow: hidden;
+  margin-bottom: 50px;
 
-  background-color: var(--dark-desaturated-blue);
-  border-radius: 4  px;
+  &__percentage {
+    display: block;
+    padding: 6px;
+
+    background-color: var(--dark-desaturated-blue);
+    border-radius: 4px;
+
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 2px;
+
+    color: var(--grayish-blue)
+  }
+
+  &__container {
+    margin-left: 16px;
+    width: 70vw;
+    height: 10px;
+    max-width: 500px;
+
+    overflow: hidden;
+
+    background-color: var(--dark-desaturated-blue);
+    border-radius: 4  px;
+  }
 
   &__progress {
     height: 100%;
     
     background-color: var(--grayish-blue);
-  } 
+  }
+
 }
 
 .timer-panels {

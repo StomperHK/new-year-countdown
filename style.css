@@ -30,6 +30,7 @@ body {
   justify-content: space-between;
   min-height: 100vh;
   min-height: 100svh;
+  margin-bottom: 50px;
   background: url("./images/bg-stars.svg");
   background-size: auto 110%;
   -webkit-user-select: none;
@@ -57,8 +58,24 @@ h1 {
 }
 
 .progress-bar {
-  margin: 0px auto 50px;
-  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.progress-bar__percentage {
+  display: block;
+  padding: 6px;
+  background-color: var(--dark-desaturated-blue);
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--grayish-blue);
+}
+.progress-bar__container {
+  margin-left: 16px;
+  width: 70vw;
   height: 10px;
   max-width: 500px;
   overflow: hidden;
