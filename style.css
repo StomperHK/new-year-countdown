@@ -30,6 +30,7 @@ body {
   justify-content: space-between;
   min-height: 100vh;
   min-height: 100svh;
+  margin-bottom: 50px;
   background: url("./images/bg-stars.svg");
   background-size: auto 110%;
   user-select: none;
