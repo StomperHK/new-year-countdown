@@ -1,5 +1,6 @@
 const bodyEL = document.querySelector('[data-js="body-element"]')
 
+const progressBarPercentageEL = document.querySelector('[data-js="progress-bar__percentage"]')
 const progressBarEL = document.querySelector('[data-js="progress-bar__progress"]')
 
 const daysLeftPanelEL = document.querySelector('[data-js="timer-panels__days-panel"]')
@@ -12,8 +13,10 @@ const secondsLeftPanelEL = document.querySelector('[data-js="timer-panels__secon
 function setProgressBarProgress(daysLeft) {
   const daysOfTheYear = getAmountOfDaysBasedOnLeapYear()
   const passedDays = daysOfTheYear - (daysLeft !== undefined ? daysLeft : daysOfTheYear)
+  const progressAsPercentage = passedDays / daysOfTheYear * 100
   
-  progressBarEL.style.width = passedDays / daysOfTheYear * 100 + '%'
+  progressBarEL.style.width = progressAsPercentage + '%'
+  progressBarPercentageEL.textContent = (progressAsPercentage === 100 ? 99 : Math.floor(progressAsPercentage)) + '%'
 }
 
 function getDifferenceBetweenDates(initialDate, finalDate) {
