@@ -66,6 +66,29 @@ h1 {
   letter-spacing: 4px;
 }
 
+header {
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    padding: 8px;
+
+    background-color: transparent;
+    border-radius: 6px;
+
+    background-color: var(--dark-desaturated-blue-lighter);
+
+    cursor: pointer;
+
+    transition: 150ms linear opacity;
+  }
+}
+
 
 // Specific styles
 
@@ -288,6 +311,12 @@ h1 {
 
 // At-rules
 
+@media (pointer: coarse) {
+  button, a {
+    cursor: default;
+  }
+}
+
 @media (max-width: 665px) {
   .timer-panels {
     gap: 25px;
@@ -315,6 +344,18 @@ h1 {
 @media (max-width: 560px) {
   h1 {
     margin: 4vh 5vh 30px;
+  }
+
+  header {
+    display: flex;
+    justify-content: flex-end
+
+    button {
+      display: block;
+      margin: 20px 20px 0px 0px;
+
+      position: static;
+    }
   }
 
   .timer-panels {

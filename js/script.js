@@ -1,5 +1,7 @@
 const bodyEL = document.querySelector('[data-js="body-element"]')
 
+const installButtonEL = document.querySelector("[data-js='install-button']")
+
 const progressBarPercentageEL = document.querySelector('[data-js="progress-bar__percentage"]')
 const progressBarEL = document.querySelector('[data-js="progress-bar__progress"]')
 
@@ -9,8 +11,27 @@ const hoursLeftPanelEL = document.querySelector('[data-js="timer-panels__hours-p
 const minutesLeftPanelEL = document.querySelector('[data-js="timer-panels__minutes-panel"]')
 const secondsLeftPanelEL = document.querySelector('[data-js="timer-panels__seconds-panel"]')
 
+let deferredPrompt = null
 let arrayOfPanelsAndAssociatedValues = null   // will get updated after calling startTimer() function
 
+
+
+function PWACanBeInstallableCallback(event) {
+  event.preventDefault()
+
+  deferredPrompt = event
+
+  installButtonEL.classList.remove("hide-element")
+}
+
+async function triggerPWAInstallation() {
+  deferredPrompt.prompt()
+  const { outcome } = await deferredPrompt.userChoice
+  
+  installButtonEL.style.opacity = 0
+
+  deferredPrompt = null 
+}
 
 function setProgressBarProgress(daysLeft) {
   const daysOfTheYear = getAmountOfDaysBasedOnLeapYear()
@@ -166,5 +187,10 @@ function startPageAnimation() {
   bodyEL.classList.remove('hide-body-element')
 }
 
+
+
+window.addEventListener("beforeinstallprompt", PWACanBeInstallableCallback)
+
+installButtonEL.addEventListener("click", triggerPWAInstallation)
 
 window.addEventListener('load', startPageAnimation)
