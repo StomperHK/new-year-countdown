@@ -15,7 +15,6 @@ let deferredPrompt = null
 let arrayOfPanelsAndAssociatedValues = null   // will get updated after calling startTimer() function
 
 
-
 function PWACanBeInstallableCallback(event) {
   event.preventDefault()
 
@@ -27,8 +26,8 @@ function PWACanBeInstallableCallback(event) {
 async function triggerPWAInstallation() {
   deferredPrompt.prompt()
   const { outcome } = await deferredPrompt.userChoice
-  
-  installButtonEL.style.opacity = 0
+
+  if (outcome === "accepted") installButtonEL.style.opacity = 0
 
   deferredPrompt = null 
 }
