@@ -31,11 +31,9 @@
     <title>Frontend Mentor | Contagem para o ano novo</title>
   </head>
   <body data-js="body-element" class="hide-body-element">
-    <header>
-      <button data-js='install-button' class="">download <img src="./images/download.svg" alt=""></button>
-    </header>
-    
     <main>
+      <div><button data-js='install-button' class="install-button hide-element">download <img src="./images/download.svg" alt=""></button></div>
+
       <h1>Contagem Para o Fim do Ano</h1>
 
       <div class="progress-bar">
@@ -98,6 +96,11 @@
       <img class="page-footer__mountain-image" src="./images/pattern-hills.svg" alt="imagem decorativa de montanhas">
     </footer>
 
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./js/serviceWorker.js")
+      }
+    </script>
     <script defer src="./js/returnArrayOfPanelValues.js"></script>
     <script defer src="./js/script.js"></script>
   </body>

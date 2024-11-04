@@ -66,8 +66,8 @@ h1 {
   letter-spacing: 4px;
 }
 
-header {
-  button {
+div:has(>.install-button) {
+  .install-button {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -346,12 +346,11 @@ header {
     margin: 4vh 5vh 30px;
   }
 
-  header {
+  div:has(>.install-button) {
     display: flex;
-    justify-content: flex-end
+    justify-content: flex-end;
 
-    button {
-      display: block;
+    .install-button {
       margin: 20px 20px 0px 0px;
 
       position: static;
