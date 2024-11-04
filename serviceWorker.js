@@ -13,8 +13,8 @@ async function respondWithCachedContent(event) {
 
   if (matches) return matches
 
-  const responseFromNetwork = await fetch(request);
-  putInCache(request, responseFromNetwork.clone());
+  const responseFromNetwork = await fetch(event.request);
+  putInCache(event.request, responseFromNetwork.clone());
   return responseFromNetwork;
 }
 
@@ -33,5 +33,5 @@ self.addEventListener("install", event => {
 })
 
 self.addEventListener("fetch", event => {
-  event.respondWith(respondWithCachedContent(event.request))
+  event.respondWith(respondWithCachedContent(event))
 })
