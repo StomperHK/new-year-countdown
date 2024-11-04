@@ -11,7 +11,6 @@ async function putInCache(request, response) {
 async function respondWithCachedContent(event) {
   const matches = await caches.match(event.request)
 
-  console.log(matches);
   if (matches) return matches
 
   const responseFromNetwork = await fetch(request);
